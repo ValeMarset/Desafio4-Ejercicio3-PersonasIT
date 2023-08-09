@@ -1,7 +1,3 @@
-// Usando la API del ejercicio anterior. Construye un script que reciba un país o de una lista de países y retorne temperatura actual, la mínima y la máxima, y ​​la descripción del clima para cada país solicitado. Hacerlo en español.📝
-
-// const API_KEY = "Inserte aquí su Api key personal e intransferible y descomente esta línea de código"
-
 async function obtenerListaPaises() {
   try {
     const response = await fetch("https://restcountries.com/v3.1/all");
@@ -15,28 +11,27 @@ async function obtenerListaPaises() {
   }
 }
 
-async function obtener_datos_climaticos() {
+// const API_KEY = "Inserte aquí su Api key personal e intransferible y descomente esta línea de código"
+
+async function obtenerDatosClimaticos() {
   try {
     const paisesInput = document.getElementById("paises").value;
     const paises = paisesInput
-      .split(",")
+      .split(",") // lo separo por comas por si llega a haber un pais con varias palabras
       .map((pais) => pais.trim().toLowerCase());
 
     const listaPaises = await obtenerListaPaises();
 
-    const paisesNoCoincidentes = paises.filter(
+    const palabrasNoCoincidentes = paises.filter(
+      //me devuelve un nuevo array con las palabras que no coinciden con paises
       (pais) => !listaPaises.includes(pais)
     );
 
-    console.log("Paises ingresados:", paises);
-    console.log("Lista de paises:", listaPaises);
-    console.log("Paises no coincidentes:", paisesNoCoincidentes);
-
-    if (paisesNoCoincidentes.length > 0) {
+    if (palabrasNoCoincidentes.length > 0) {
       let advertenciaError = document.getElementById("advertenciaError");
       advertenciaError.insertAdjacentHTML(
         "afterbegin",
-        `La/s palabra/s ingresada/s: <strong>${paisesNoCoincidentes}</strong> no coincide con un país, por favor intentelo nuevamente.`
+        `La/s palabra/s ingresada/s: <strong>${palabrasNoCoincidentes}</strong> no coincide con un país, por favor intentelo nuevamente.`
       );
 
       console.warn(
@@ -44,7 +39,7 @@ async function obtener_datos_climaticos() {
       );
 
       setTimeout(() => {
-        advertenciaError.innerHTML = ""; // Elimina el contenido de la sección
+        advertenciaError.innerHTML = "";
       }, 5000);
       return;
     }
