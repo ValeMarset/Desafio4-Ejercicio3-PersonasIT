@@ -3,22 +3,30 @@ async function obtenerListaPaises() {
     const response = await fetch("https://restcountries.com/v3.1/all");
     const data = await response.json();
     const listaPaises = data.map((pais) =>
-      pais.name.common.trim().toLowerCase()
+      pais.translations.spa.common
+        .trim()
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
     );
     return listaPaises;
   } catch (error) {
     return console.error("Error al obtener la lista de países", error);
   }
 }
-
 // const API_KEY = "Inserte aquí su Api key personal e intransferible y descomente esta línea de código"
-
 async function obtenerDatosClimaticos() {
   try {
     const paisesInput = document.getElementById("paises").value;
     const paises = paisesInput
       .split(",") // lo separo por comas por si llega a haber un pais con varias palabras
-      .map((pais) => pais.trim().toLowerCase());
+      .map((pais) =>
+        pais
+          .trim()
+          .toLowerCase()
+          .normalize("NFD")
+          .replace(/[\u0300-\u036f]/g, "")
+      );
 
     const listaPaises = await obtenerListaPaises();
 
