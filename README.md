@@ -73,4 +73,12 @@ Es importante mencionar que en algunos casos, la API devuelve el mismo valor par
 
 ## Datos que devuelve la API
 
-Tanto en Python como en Javascript, la Api no reconoce algunos países como por ejemplo, "República Dominicana".
+En ambas implementaciones, ya sea en Python o en JavaScript, la API no reconoce algunos países, como por ejemplo, "República Dominicana" o "Emiratos Árabes Unidos", entre otros. Me aseguré de que esta falta de reconocimiento no se debiera a caracteres especiales, como tildes, mayúsculas, espacios ni a la estructura de países compuestos por más de una palabra.
+
+## Fuentes:
+
+- API OpenWeatherMap: https://openweathermap.org/api
+- API restcountries.com: https://restcountries.com/
+- Librería `requests` para Python: https://docs.python-requests.org/en/master/
+- Librería `dotenv` para Python: https://pypi.org/project/python-dotenv/
+- Librería `unidecode` para Python: https://pypi.org/project/Unidecode/
